@@ -1,6 +1,8 @@
 # Did I tell you I have a drone ?
 
-<img align="right" src="https://github-readme-stats.vercel.app/api?username=LeandreBl&show_icons=true">
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=LeandreBl&show_icons=true">
+</p>
 
 - 🔭 I’m currently working at #Epitech Paris
 - 🌱 I’m currently learning how the f*** does time works in the universe ?
