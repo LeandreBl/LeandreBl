@@ -5,8 +5,8 @@
 </p>
 
 - 🔭 I’m currently working at #Epitech Paris
-- 🌱 I’m currently learning how the f*** does time works in the universe ?
-- ⚡ Fun fact: I really hate my students
+- 🌱 I’m currently trying to understand what is time in the universe
+- ⚡ Fun fact: I really hate my students (that's not true but no one should know, ok ?)
 - :milky_way: I love Wakfu.
 - :video_game: I main Xerath
 ---
