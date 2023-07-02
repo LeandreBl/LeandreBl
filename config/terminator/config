@@ -1,0 +1,20 @@
+[global_config]
+  title_transmit_bg_color = "#26a269"
+[keybindings]
+  layout_launcher = <Alt>eacute
+[profiles]
+  [[default]]
+    background_darkness = 0.95
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    use_custom_command = True
+    custom_command = /bin/zsh
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
