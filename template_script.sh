@@ -9,7 +9,7 @@ NEED_ROOT=false
 VERSION=1.0
 #
 # $RELEASE_DATE: release date of this script
-RELEASE_DATE="02 JULY 2023"
+RELEASE_DATE="04 JULY 2023"
 #
 # $AUTHOR: Author of this script
 AUTHOR="leandre.bla@gmail.com"
@@ -99,8 +99,22 @@ try() {
     check_error "$MESSAGE" "$EXIT_CODE" $@
 }
 
+try_as() {
+    local MESSAGE=$1
+    local USER_AS=$2
+    shift
+    shift
+    try "$MESSAGE" sudo -u $USER_AS $@
+}
+
+try_as_current_user() {
+    local MESSAGE=$1
+    shift
+    try_as "$MESSAGE" $SUDO_USER $@
+}
+
 ask_yes_no() {
-    local PROMPT=$1
+    local PROMPT=$@
     read -p "$PROMPT [Y/n]" ANSWER
 
     case $ANSWER in
@@ -133,11 +147,19 @@ separating_banner() {
     local DIFFERENCE=$[COLUMNS - MESSAGE_LENGTH]
     local PADDING_LEFT=$[DIFFERENCE / 2]
     repeat "=" $COLUMNS
-    echo
+    echo $YELLOW
     repeat " " $PADDING_LEFT
-    echo $MESSAGE
+    echo $MESSAGE $NO_COLOR
     repeat "=" $COLUMNS
     echo
+}
+
+command_exists() {
+    local COMMAND=$1
+    if ! [ -x "$(command -v $COMMAND)" ]; then
+        echo false
+    fi
+    echo true
 }
 
 # ===Variables===
@@ -162,8 +184,15 @@ separating_banner() {
 #
 # log(message...): log all the passed arguments both in the terminal and in the log file
 #
-# try(explanation_of_the_command, command...): log and verify the output of the command
-#                                              if it fails, the program will exit
+# try(explanation_of_the_command, command...): log, execute (as the user who launched this script, root if sudo)
+#                                              and verify the output of the command if it fails, the program will exit
+#
+# try_as(explanation_of_the_command, username, command...): log, execute (as the user passed in argument)
+#                                              and verify the output of the command if it fails, the program will exit
+#
+# try_as_current_user(explanation_of_the_command, command...): log, execute (as the user who really started this script)
+#                                              and verify the output of the command if it fails, the program will exit
+#
 # ask_yes_no(prompt): prompt a message asking the user for yes/or no, it returns a string "y" or "n"
 #
 # check_error(message, exit_code, command...): check if the exit code is 0 or not, it will then display
@@ -171,7 +200,9 @@ separating_banner() {
 #                                              it's useful when the command contains redirections
 #                                              and pipes and can't be used in a "try" functions
 #
-# separating_banner(message...):               print a little separating banner with a message in the middle
+# separating_banner(message...): print a little separating banner with a message in the middle
+#
+# command_exists(command): prints true or false if the command exists or not
 #
 # ===Code===
 # Insert your code here
