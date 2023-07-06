@@ -213,7 +213,7 @@ USER_HOME=/home/$SUDO_USER
 
 separating_banner Updating and installing debian default softwares and dependencies
 try "Updating apt" $APT_COMMAND update
-try "Installing default apt softwares and dependencies" $APT_COMMAND install -y build-essential zsh terminator wget curl valgrind python3 git zip xz-utils
+try "Installing default apt softwares and dependencies" $APT_COMMAND install -y build-essential zsh terminator wget curl valgrind python3 git zip xz-utils libtool
 
 separating_banner "oh-my-zsh"
 sudo -u $SUDO_USER sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
